@@ -9,7 +9,7 @@ Kinematic::Kinematic(Motor &m1, Motor &m2)
 void Kinematic::forward(int speed)
 {
     m1->speed(speed);
-    m2->speed(speed)
+    m2->speed(speed);
 }
 
 void Kinematic::reverse(int speed)
