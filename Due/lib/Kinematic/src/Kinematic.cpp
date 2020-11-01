@@ -29,6 +29,11 @@ void Kinematic::rotateRight(int speed)
     m1->speed(speed);
     m2->speed(-speed);
 }
+
+void Kinematic::brake(){
+    m1->brake();
+    m2->brake();
+}
 #elif defined(OMNI)
 Kinematic::Kinematic(Motor &m1, Motor &m2, Motor &m3)
 {

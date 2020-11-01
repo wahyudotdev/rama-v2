@@ -2,14 +2,14 @@
 #define _kinematic_h
 #include <Arduino.h>
 #include <Motor.h>
-/*
+
+#define BASIC
+
+/**
     #define BASIC   => kinematic 2 roda 
     #define OMNI    => kinematic 3 roda omni
     #define MECANUM => kinematic 4 roda mecanum
 */
-
-#define BASIC
-
 class Kinematic
 {
 private:
@@ -22,6 +22,7 @@ public:
     void reverse(int speed);
     void rotateRight(int speed);
     void rotateLeft(int speed);
+    void brake();
 #elif defined(OMNI)
     Kinematic(Motor &m1, Motor &m2, Motor &m3);
     void forward(int speed);

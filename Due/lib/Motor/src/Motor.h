@@ -21,7 +21,8 @@ private:
     int min_pwm = 0;
     int max_pwm = 150;
     byte divisor = 3;
-    void setPwmFrequency();
+    int threshold = 50;
+    // void setPwmFrequency();
 public:
     byte en_a, en_b;
     volatile int rpm;
@@ -35,7 +36,8 @@ public:
     void isrHandler();
     void calculateRpm(int sampling_time_ms);
     void setPwmFrequency(byte divisor);
-    void setPwmThreshold(int up_thres, int down_thres);
+    void setPidThreshold(int up_thres, int down_thres);
+    void setPwmThreshold(int threshold);
 };
 
 #endif
