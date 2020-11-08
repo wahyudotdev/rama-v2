@@ -37,9 +37,6 @@ void setup()
   // pinMode(10, INPUT);
   // m1.pid(5, 0.1, 0.4, 2000);
   // m2.pid(5, 0.1, 0.4, 2000);
-  // pinMode(M1_A, OUTPUT);
-  // pinMode(M1_B, OUTPUT);
-  // pinMode(M1_PWM, OUTPUT);
   attachInterrupt(digitalPinToInterrupt(m1.en_a), EN1, FALLING);
   attachInterrupt(digitalPinToInterrupt(m2.en_a), EN2, FALLING);
 
@@ -60,35 +57,18 @@ void loop()
   /*
     Remot terputus maka nilai Aux3 akan maksimum, Aux3 = cameraDegree
   */
- Serial.println(pulseInLong(YAW, HIGH));
-  //  digitalWrite()
-  // m1.speed(15);
-  // Serial.println("X : " + (String)ex7.x() + " Y : " + (String)ex7.y() + " Rotate : " + (String)ex7.rotate());
-  // int x = ex7.x();
-  // int y = ex7.y();
-  // int rotate = ex7.rotate();
-  // if (abs(y) > 100 && abs(rotate < 100))
-  // {
-  //   y > 0 ? base.forward(y) : base.reverse(y * -1);
-  // }
-  // else if (abs(rotate) > 100)
-  // {
-  //   rotate > 0 ? base.rotateRight(rotate) : base.rotateLeft(rotate * -1);
-  // }
-  // else
-  //   base.brake();
-  // m1.speed(255);
-  // m2.speed(255);
-  // digitalWrite(M1_A ,HIGH);
-  // digitalWrite(M2_A, HIGH);
-  // digitalWrite(M1_PWM, HIGH);
-  // digitalWrite(M2_PWM, HIGH);
-  // digitalWrite(M1_B, HIGH);
-  // digitalWrite(M2_B, HIGH);
-  // digitalWrite(M1_A, LOW);
-  // digitalWrite(M2_A, LOW);
-  // digitalWrite(M1_PWM, LOW);
-  // digitalWrite(M2_PWM, LOW);
-  // digitalWrite(M1_B, LOW);
-  // digitalWrite(M2_B, LOW);
+  Serial.println("X : " + (String)ex7.x() + " Y : " + (String)ex7.y() + " Rotate : " + (String)ex7.rotate());
+  int x = ex7.x();
+  int y = ex7.y();
+  int rotate = ex7.rotate();
+  if (abs(y) > 50 && abs(rotate < 50))
+  {
+    y > 0 ? base.forward(y) : base.reverse(y * -1);
+  }
+  else if (abs(rotate) > 50)
+  {
+    rotate > 0 ? base.rotateRight(rotate) : base.rotateLeft(rotate * -1);
+  }
+  else
+    base.brake();
 }
