@@ -27,6 +27,7 @@ public:
     byte en_a, en_b;
     volatile int rpm;
     volatile int encoder_tick;
+    volatile long encoder_tick_acc;
     Motor(byte a_pin, byte b_pin, byte pwm_pin);
     Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b);
     Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b, int ppr);

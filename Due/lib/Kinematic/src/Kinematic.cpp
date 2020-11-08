@@ -81,6 +81,26 @@ void Kinematic::shiftLeft(int speed)
     m3->speed(speed);
     m4->speed(speed);
 }
+void Kinematic::rotateLeft(int speed)
+{
+    m1->speed(-speed);
+    m2->speed(-speed);
+    m3->speed(-speed);
+    m4->speed(-speed);
+}
+void Kinematic::rotateRight(int speed)
+{
+    m1->speed(speed);
+    m2->speed(speed);
+    m3->speed(speed);
+    m4->speed(speed);
+}
+void Kinematic::brake(){
+    m1->brake();
+    m2->brake();
+    m3->brake();
+    m4->brake();
+}
 #else
 #error "Setting dulu kinematik di Kinematic.h"
 #endif

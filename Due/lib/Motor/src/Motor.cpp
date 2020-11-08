@@ -58,11 +58,23 @@ void Motor::pid(float kp, float ki, float kd, float windup)
     this->windup = windup;
     this->pidEnable = true;
 }
+/*
+    Atur batas PWM PID yang dihasilkan
+    Range yang diperbolehkan antara 0-255
+    default 0-150
+*/
 void Motor::setPidThreshold(int min_pwm, int max_pwm)
 {
     this->min_pwm = min_pwm;
     this->max_pwm = max_pwm;
 }
+
+/*
+    Mengatur kecepatan motor, apabila PID dimatikan maka akan menggunakan
+    nilai dari pwm yg dimasukkan. Apabila PID enable maka nilai yang
+    dimasukkan adalah nilai setpoint RPM. Nilai minus untuk CCW
+    dan nilai plus untuk CW
+*/
 void Motor::speed(int target)
 {
     if (pidEnable == true)
@@ -85,35 +97,54 @@ void Motor::speed(int target)
     }
     else
     {
-        if(target > 255) target = 255;
-        else if (target < -255) target = -255;
+        if (target > 255)
+            target = 255;
+        else if (target < -255)
+            target = -255;
         target > 0 ? forward(target) : reverse(target);
     }
 }
 
+/*
+    Motor bergerak clock wise
+*/
 void Motor::forward(int pwm)
 {
-    if(abs(pwm) < threshold) pwm = 0;
+    if (abs(pwm) < threshold)
+        pwm = 0;
     digitalWrite(this->a_pin, HIGH);
     digitalWrite(this->b_pin, LOW);
     analogWrite(this->pwm_pin, pwm);
 }
 
+/*
+    Motor bergerak counter clock wise
+*/
 void Motor::reverse(int pwm)
 {
-    if(abs(pwm) < threshold) pwm = 0;
+    if (abs(pwm) < threshold)
+        pwm = 0;
     digitalWrite(this->a_pin, LOW);
     digitalWrite(this->b_pin, HIGH);
     analogWrite(this->pwm_pin, abs(pwm));
 }
 
 #if defined(EMS)
+/*
+    Khusus driver EMS terdapat fungsi untuk mengerem
+    motor dengan membuat pin A dan pin B menjadi HIGH
+*/
 void Motor::brake()
 {
     digitalWrite(this->a_pin, HIGH);
     digitalWrite(this->b_pin, HIGH);
 }
 #else
+
+/*
+    Motor berhenti, bisa diatur untuk driver EMS
+    dengan mendefinisikan #define EMS pada Motor.h
+*/
 void Motor::brake()
 {
     digitalWrite(this->a_pin, LOW);
@@ -121,11 +152,21 @@ void Motor::brake()
 }
 #endif
 
+/*
+    Fungsi berikut adalah untuk merecord hasil pembacaan encoder motor.
+    encoder_tick adalah variabel yang akan direset pada interval tertentu
+    untuk mendapatkan kecepatan motor, sedangkan encoder_tick_acc
+    adalah variabel yang tidak akan direset selama sistem berjalan
+*/
 void Motor::isrHandler()
 {
     digitalRead(b_pin) == HIGH ? encoder_tick++ : encoder_tick--;
+    digitalRead(b_pin) == HIGH ? encoder_tick_acc++ : encoder_tick_acc--;
 }
 
+/*
+    Masukkan waktu sampling (ms) sama persis dengan waktu timer interrupt
+*/
 void Motor::calculateRpm(int sampling_time_ms)
 {
 #if (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
@@ -135,6 +176,7 @@ void Motor::calculateRpm(int sampling_time_ms)
     encoder_tick = 0;
 }
 
-void Motor::setPwmThreshold(int threshold){
+void Motor::setPwmThreshold(int threshold)
+{
     this->threshold = threshold;
 }

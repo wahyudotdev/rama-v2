@@ -66,9 +66,13 @@ int EX7::y()
 {
     return map(getPitch(), 980, 1850, -255, 255);
 }
+int EX7::x()
+{
+    return map(getYaw(), 1900, 1000, -255 , 255);
+}
 int EX7::rotate()
 {
-    return map(getYaw() , 980, 1850, -255, 255);
+    return map(getRoll() , 1850, 980, -255, 255);
 }
 int EX7::cameraDegree(){
     return abs(map(getAux3(), 980, 1970, 0, 360));

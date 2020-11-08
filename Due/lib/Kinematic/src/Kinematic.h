@@ -2,14 +2,8 @@
 #define _kinematic_h
 #include <Arduino.h>
 #include <Motor.h>
+#include "KinematicSetting.h"
 
-#define BASIC
-
-/**
-    #define BASIC   => kinematic 2 roda 
-    #define OMNI    => kinematic 3 roda omni
-    #define MECANUM => kinematic 4 roda mecanum
-*/
 class Kinematic
 {
 private:
@@ -39,6 +33,7 @@ public:
     void shiftLeft(int speed);
     void rotateRight(int speed);
     void rotateLeft(int speed);
+    void brake();
 #endif
 };
 
