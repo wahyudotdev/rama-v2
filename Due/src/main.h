@@ -5,7 +5,6 @@
     TimerOne
 */
 #if (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
-#include <DueTimer.h>
 #include <FreeRTOS_ARM.h>
 
 #else
@@ -74,6 +73,8 @@
 #define PITCH   44
 #define ROLL    42
 #define THROT   40
+
+#define srvPin  38
 #endif
 /* Inisialisasi library
  */
@@ -92,7 +93,7 @@ Kinematic base(m1, m2);
 #endif
 EX7 ex7(AUX3, AUX2, AUX1, YAW, PITCH, ROLL, THROT);
 
-// Servo servo;
+Servo servo;
 // inisialisasi fungsi
 void EN1(void); void EN2(void); void timerIsr(void);
 
