@@ -33,6 +33,7 @@ void timerIsr()
 void setup()
 {
   Serial.begin(9600);
+  Serial2.begin(115200);
   servo.attach(srvPin);
   // pinMode(10, INPUT);
   // m1.pid(5, 0.1, 0.4, 2000);
@@ -52,12 +53,17 @@ void setup()
 #endif
 }
 
+int count;
 void loop()
 {
-  servo.write(180);
-  delay(2000);
-  servo.write(0);
-  delay(2000);
+  Serial2.print("Hallo dari Due : "+(String)count);
+  Serial2.write('!');
+  count++;
+  delay(1000);
+  // servo.write(180);
+  // delay(2000);
+  // servo.write(0);
+  // delay(2000);
   // for(int i = 0 ; i < 180 ; i++){
   //   servo.write(i);
   //   delay(20);
