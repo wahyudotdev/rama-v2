@@ -6,7 +6,7 @@
 
 /*
     7 channel : AUX3, AUX2, AUX1, YAW, PITCH, ROLL, THROT
-    4 channel : YAW, PITCH, ROLL, THROT
+    4 channel : AUX3, YAW, PITCH, ROLL
 */
 class EX7
 {
@@ -14,6 +14,7 @@ private:
     byte aux1, aux2, aux3, yaw, pitch, roll, throt;
     unsigned long lastTime, now;
 public:
+    bool connected;
     int getAux1();
     int getAux2();
     int getAux3();

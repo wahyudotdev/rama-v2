@@ -34,9 +34,13 @@ void setup()
 {
   Serial.begin(9600);
   Serial2.begin(115200);
+  Serial2.print("bolt");
+  Serial2.write(13);
+  Serial2.print("11111111");
+  Serial2.write(13);
   servo.attach(srvPin);
   // pinMode(10, INPUT);
-  // m1.pid(5, 0.1, 0.4, 2000);
+  m1.pid(5, 0.1, 0.4, 2000);
   // m2.pid(5, 0.1, 0.4, 2000);
   attachInterrupt(digitalPinToInterrupt(m1.en_a), EN1, FALLING);
   attachInterrupt(digitalPinToInterrupt(m2.en_a), EN2, FALLING);
@@ -53,40 +57,15 @@ void setup()
 #endif
 }
 
-int count;
 void loop()
 {
-  Serial2.print("Hallo dari Due : "+(String)count);
-  Serial2.write('!');
-  count++;
-  delay(1000);
-  // servo.write(180);
-  // delay(2000);
-  // servo.write(0);
-  // delay(2000);
-  // for(int i = 0 ; i < 180 ; i++){
-  //   servo.write(i);
-  //   delay(20);
-  // }
-  // for(int i = 180; i > 0 ; i--){
-  //   servo.write(i);
-  //   delay(20);
-  // }
-  /*
-    Remot terputus maka nilai Aux3 akan maksimum, Aux3 = cameraDegree
-  */
-  // Serial.println("X : " + (String)ex7.x() + " Y : " + (String)ex7.y() + " Rotate : " + (String)ex7.rotate());
-  // int x = ex7.x();
-  // int y = ex7.y();
-  // int rotate = ex7.rotate();
-  // if (abs(y) > 50 && abs(rotate < 50))
-  // {
-  //   y > 0 ? base.forward(y) : base.reverse(y * -1);
-  // }
-  // else if (abs(rotate) > 50)
-  // {
-  //   rotate > 0 ? base.rotateRight(rotate) : base.rotateLeft(rotate * -1);
-  // }
-  // else
-  //   base.brake();
+  servo.write(ex7.cameraDegree());
+  if(ex7.connected){
+    if(abs(ex7.rotate())> 0){
+      ex7.y() > 0 ? base.forward(ex7.y()): base.reverse(ex7.y());
+    }
+    else{
+      ex7.rotate() > 0 ? base.rotateRight(ex7.rotate()) : base.rotateLeft(ex7.rotate());
+    }
+  }
 }

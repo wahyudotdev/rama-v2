@@ -1,6 +1,12 @@
 #include <Arduino.h>
 #include "Motor.h"
 
+/*
+    Mode tanpa encoder
+    a_pin   -> Motor A pin
+    b_pin   -> Motor B pin
+    pwm_pin -> Motor PWM pin
+*/
 Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin)
 {
     this->a_pin = a_pin;
@@ -12,6 +18,14 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin)
     pinMode(this->pwm_pin, OUTPUT);
     // setPwmFrequency();
 }
+/*
+    Mode dengan encoder
+    a_pin   -> Motor A pin
+    b_pin   -> Motor B pin
+    pwm_pin -> Motor PWM pin
+    en_a    -> Encoder channel A
+    en_b    -> Encoder channel B
+*/
 Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b)
 {
     this->a_pin = a_pin;
@@ -29,6 +43,16 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b)
     digitalWrite(this->pwm_pin, LOW);
     // setPwmFrequency();
 }
+
+/*
+    Mode dengan encoder dengan setting manual PPR
+    PPR default 135 (PG-36)
+    a_pin   -> Motor A pin
+    b_pin   -> Motor B pin
+    pwm_pin -> Motor PWM pin
+    en_a    -> Encoder channel A
+    en_b    -> Encoder channel B
+*/
 Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b, int ppr)
 {
     this->a_pin = a_pin;
@@ -49,6 +73,20 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b, int ppr
 }
 /*
     Kp, Ki, Kd, Windup
+    
+    Kp
+    + Cepat mencapai setpoint
+    - Menimbulkan osilasi
+    
+    Ki
+    + Koreksi pada interval tertentu
+    - Menimbulkan windup
+    
+    Kd
+    + Menahan kondisi stabil, meredam osilasi
+    - Akan stuck pada kondisi sebelum setpoint
+
+    Rumus PID = (kp * error * 0.1) + (ki * integral error* 0.01) + (kd * (error - last Error) * 0.1)
 */
 void Motor::pid(float kp, float ki, float kd, float windup)
 {
@@ -165,7 +203,14 @@ void Motor::isrHandler()
 }
 
 /*
-    Masukkan waktu sampling (ms) sama persis dengan waktu timer interrupt
+    Masukkan waktu sampling (ms) sama persis dengan waktu timer interrupt.
+    Misal sampling rpm adalah 10 ms:
+
+    int sampling_time_ms = 10;
+    Timer1.initialize(1000 * sampling_time_ms);
+    maka
+    m.calculateRpm(sampling_time_ms);
+    
 */
 void Motor::calculateRpm(int sampling_time_ms)
 {

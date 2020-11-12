@@ -8,24 +8,28 @@ Kinematic::Kinematic(Motor &m1, Motor &m2)
 }
 void Kinematic::forward(int speed)
 {
+    speed = abs(speed);
     m1->speed(speed);
     m2->speed(speed);
 }
 
 void Kinematic::reverse(int speed)
 {
+    speed = abs(speed);
     m1->speed(-speed);
     m2->speed(-speed);
 }
 
 void Kinematic::rotateLeft(int speed)
 {
+    speed = abs(speed);
     m1->speed(-speed);
     m2->speed(speed);
 }
 
 void Kinematic::rotateRight(int speed)
 {
+    speed = abs(speed);
     m1->speed(speed);
     m2->speed(-speed);
 }
@@ -55,6 +59,7 @@ Kinematic::Kinematic(Motor &m1, Motor &m2, Motor &m3, Motor &m4)
 }
 void Kinematic::forward(int speed)
 {
+    speed = abs(speed);
     m1->speed(speed);
     m2->speed(-speed);
     m3->speed(speed);
@@ -62,6 +67,7 @@ void Kinematic::forward(int speed)
 }
 void Kinematic::reverse(int speed)
 {
+    speed = abs(speed);
     m1->speed(-speed);
     m2->speed(speed);
     m3->speed(-speed);
@@ -69,6 +75,7 @@ void Kinematic::reverse(int speed)
 }
 void Kinematic::shiftRight(int speed)
 {
+    speed = abs(speed);
     m1->speed(speed);
     m2->speed(speed);
     m3->speed(-speed);
@@ -76,6 +83,7 @@ void Kinematic::shiftRight(int speed)
 }
 void Kinematic::shiftLeft(int speed)
 {
+    speed = abs(speed);
     m1->speed(-speed);
     m2->speed(-speed);
     m3->speed(speed);
@@ -83,6 +91,7 @@ void Kinematic::shiftLeft(int speed)
 }
 void Kinematic::rotateLeft(int speed)
 {
+    speed = abs(speed);
     m1->speed(-speed);
     m2->speed(-speed);
     m3->speed(-speed);
@@ -90,6 +99,7 @@ void Kinematic::rotateLeft(int speed)
 }
 void Kinematic::rotateRight(int speed)
 {
+    speed = abs(speed);
     m1->speed(speed);
     m2->speed(speed);
     m3->speed(speed);
