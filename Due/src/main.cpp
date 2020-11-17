@@ -59,22 +59,25 @@ void setup()
 
 void loop()
 {
+  int y = ex7.y();
+  int rotate = ex7.rotate();
+  int cameraDeg = ex7.cameraDegree();
   // base.rotateLeft(255);
   // m1.speed(255);
   // m2.speed(255);
   // Serial.println("Aux 3 : "+(String)ex7.getAux3()+"  camera : "+(String)ex7.cameraDegree()+" connected : "+(String)ex7.connected);
-  servo.write(ex7.cameraDegree());
-  if (ex7.connected && (abs(ex7.y())> 50 || abs(ex7.rotate())> 50))
+  servo.write(cameraDeg);
+  if (ex7.connected && (abs(y)> 50 || abs(rotate)> 50))
   {
-    if (abs(ex7.rotate()) < 50)
+    if (abs(rotate) < 50)
     {
       Serial.println("Maju mundur");
-      ex7.y() > 0 ? base.forward(ex7.y()) : base.reverse(ex7.y());
+      y > 0 ? base.forward(y) : base.reverse(y);
     }
     else
     {
       Serial.println("muter");
-      ex7.rotate() > 0 ? base.rotateRight(ex7.rotate()) : base.rotateLeft(ex7.rotate());
+      rotate > 0 ? base.rotateRight(rotate) : base.rotateLeft(rotate);
     }
   }
   else
