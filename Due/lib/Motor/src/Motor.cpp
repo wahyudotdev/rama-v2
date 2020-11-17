@@ -152,7 +152,9 @@ void Motor::forward(int pwm)
         pwm = 0;
     digitalWrite(this->a_pin, HIGH);
     digitalWrite(this->b_pin, LOW);
-    analogWrite(this->pwm_pin, pwm);
+    // analogWrite(this->pwm_pin, pwm);
+    analogWrite(this->pwm_pin, 255);
+
 }
 
 /*
@@ -164,7 +166,8 @@ void Motor::reverse(int pwm)
         pwm = 0;
     digitalWrite(this->a_pin, LOW);
     digitalWrite(this->b_pin, HIGH);
-    analogWrite(this->pwm_pin, abs(pwm));
+    // analogWrite(this->pwm_pin, abs(pwm));
+    analogWrite(this->pwm_pin, abs(255));
 }
 
 #if defined(EMS)

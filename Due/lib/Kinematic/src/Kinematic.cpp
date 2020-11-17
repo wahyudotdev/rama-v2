@@ -10,28 +10,28 @@ void Kinematic::forward(int speed)
 {
     speed = abs(speed);
     m1->speed(speed);
-    m2->speed(speed);
+    m2->speed(-speed);
 }
 
 void Kinematic::reverse(int speed)
 {
     speed = abs(speed);
     m1->speed(-speed);
-    m2->speed(-speed);
+    m2->speed(speed);
 }
 
 void Kinematic::rotateLeft(int speed)
 {
     speed = abs(speed);
     m1->speed(-speed);
-    m2->speed(speed);
+    m2->speed(-speed);
 }
 
 void Kinematic::rotateRight(int speed)
 {
     speed = abs(speed);
     m1->speed(speed);
-    m2->speed(-speed);
+    m2->speed(speed);
 }
 
 void Kinematic::brake(){

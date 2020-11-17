@@ -56,8 +56,8 @@
 #elif defined(RAMAV2)
 #define EN1_A   2
 #define EN1_B   4
-#define M1_A    8
-#define M1_B    7
+#define M1_A    7
+#define M1_B    8
 #define M1_PWM  6
 
 #define EN2_A   3

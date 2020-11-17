@@ -40,7 +40,7 @@ void setup()
   Serial2.write(13);
   servo.attach(srvPin);
   // pinMode(10, INPUT);
-  m1.pid(5, 0.1, 0.4, 2000);
+  // m1.pid(5, 0.1, 0.4, 2000);
   // m2.pid(5, 0.1, 0.4, 2000);
   attachInterrupt(digitalPinToInterrupt(m1.en_a), EN1, FALLING);
   attachInterrupt(digitalPinToInterrupt(m2.en_a), EN2, FALLING);
@@ -59,13 +59,27 @@ void setup()
 
 void loop()
 {
+  // base.rotateLeft(255);
+  // m1.speed(255);
+  // m2.speed(255);
+  // Serial.println("Aux 3 : "+(String)ex7.getAux3()+"  camera : "+(String)ex7.cameraDegree()+" connected : "+(String)ex7.connected);
   servo.write(ex7.cameraDegree());
-  if(ex7.connected){
-    if(abs(ex7.rotate())> 0){
-      ex7.y() > 0 ? base.forward(ex7.y()): base.reverse(ex7.y());
+  if (ex7.connected && (abs(ex7.y())> 50 || abs(ex7.rotate())> 50))
+  {
+    if (abs(ex7.rotate()) < 50)
+    {
+      Serial.println("Maju mundur");
+      ex7.y() > 0 ? base.forward(ex7.y()) : base.reverse(ex7.y());
     }
-    else{
+    else
+    {
+      Serial.println("muter");
       ex7.rotate() > 0 ? base.rotateRight(ex7.rotate()) : base.rotateLeft(ex7.rotate());
     }
+  }
+  else
+  {
+    Serial.println("Mandek");
+    base.brake();
   }
 }

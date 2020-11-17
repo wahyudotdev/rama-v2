@@ -121,6 +121,6 @@ int EX7::rotate()
 */
 int EX7::cameraDegree(){
     int deg = abs(map(getAux3(),980, 1970,0,360));
-    deg>350? connected = false : connected = true;
+    deg > 350? connected = false : connected = true;
     return deg/2;
 }
