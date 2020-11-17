@@ -95,24 +95,24 @@ int EX7::y()
 }
 
 /*
-    Didapat dari nilai tombol yaw kontroller, nilai akan
-    positif jika yaw kekanan, negatif jika kekiri. Gunakan
+    Didapat dari nilai tombol Roll kontroller, nilai akan
+    positif jika roll kekanan, negatif jika kekiri. Gunakan
     nilai ini untuk sliding posisi robot (hanya base X, Y, dan plus)
 */
 int EX7::x()
 {
-    return map(getYaw(), 1900, 1000, -255 , 255);
+    return map(getRoll(), 1900, 1000, -255 , 255);
 }
 
 /*
-    Nilai didapat dari tombol Roll pada kontroller.
-    Apabila roll ke kanan maka nilai akan positif,
-    jika roll ke kiri akan negatif. Gunakan nilai ini
+    Nilai didapat dari tombol Yaw pada kontroller.
+    Apabila Yaw ke kanan maka nilai akan positif,
+    jika Yaw ke kiri akan negatif. Gunakan nilai ini
     untuk memutar posisi robot
 */
 int EX7::rotate()
 {
-    return map(getRoll() , 1850, 980, -255, 255);
+    return map(getYaw() , 1850, 980, -255, 255);
 }
 /*
     Nilai didapat dari Aux3 controller,
