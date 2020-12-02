@@ -59,6 +59,7 @@ void setup()
 
 void loop()
 {
+
   int y = ex7.y();
   int rotate = ex7.rotate();
   int cameraDeg = ex7.cameraDegree();

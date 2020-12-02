@@ -91,7 +91,7 @@ int EX7::getThrot(){
 */
 int EX7::y()
 {
-    return map(getPitch(), 980, 1850, -255, 255);
+    return map(getYaw(), 980, 1850, -255, 255);
 }
 
 /*
@@ -112,7 +112,7 @@ int EX7::x()
 */
 int EX7::rotate()
 {
-    return map(getYaw() , 1850, 980, -255, 255);
+    return map(getPitch() , 1850, 980, -255, 255);
 }
 /*
     Nilai didapat dari Aux3 controller,
