@@ -16,7 +16,7 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin)
     pinMode(this->a_pin, OUTPUT);
     pinMode(this->b_pin, OUTPUT);
     pinMode(this->pwm_pin, OUTPUT);
-    // setPwmFrequency();
+    setPwmFrequency();
 }
 /*
     Mode dengan encoder
@@ -41,7 +41,7 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b)
     digitalWrite(this->a_pin, LOW);
     digitalWrite(this->b_pin, LOW);
     digitalWrite(this->pwm_pin, LOW);
-    // setPwmFrequency();
+    setPwmFrequency();
 }
 
 /*
@@ -69,7 +69,7 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b, int ppr
     digitalWrite(this->a_pin, LOW);
     digitalWrite(this->b_pin, LOW);
     digitalWrite(this->pwm_pin, LOW);
-    // setPwmFrequency();
+    setPwmFrequency();
 }
 /*
     Kp, Ki, Kd, Windup
@@ -154,7 +154,6 @@ void Motor::forward(int pwm)
     digitalWrite(this->b_pin, LOW);
     // analogWrite(this->pwm_pin, pwm);
     analogWrite(this->pwm_pin, 255);
-
 }
 
 /*
@@ -227,4 +226,28 @@ void Motor::calculateRpm(int sampling_time_ms)
 void Motor::setPwmThreshold(int threshold)
 {
     this->threshold = threshold;
+}
+
+void Motor::setPwmFrequency()
+{
+#if (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
+    uint32_t pwmPin = pwm_pin;
+    uint32_t maxDutyCount = 2;
+    uint32_t clkAFreq = 42000000ul;
+    uint32_t pwmFreq = 42000000ul;
+    pmc_enable_periph_clk(PWM_INTERFACE_ID);
+    PWMC_ConfigureClocks(clkAFreq, 0, VARIANT_MCK);
+    PIO_Configure(
+        g_APinDescription[pwmPin].pPort,
+        g_APinDescription[pwmPin].ulPinType,
+        g_APinDescription[pwmPin].ulPin,
+        g_APinDescription[pwmPin].ulPinConfiguration);
+    uint32_t channel = g_APinDescription[pwmPin].ulPWMChannel;
+    PWMC_ConfigureChannel(PWM_INTERFACE, channel, pwmFreq, 0, 0);
+    PWMC_SetPeriod(PWM_INTERFACE, channel, maxDutyCount);
+    PWMC_EnableChannel(PWM_INTERFACE, channel);
+    PWMC_SetDutyCycle(PWM_INTERFACE, channel, 1);
+    pmc_mck_set_prescaler(2);
+#else
+#endif
 }

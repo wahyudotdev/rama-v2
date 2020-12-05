@@ -22,7 +22,7 @@ private:
     int max_pwm = 150;
     byte divisor = 3;
     int threshold = 50;
-    // void setPwmFrequency();
+    void setPwmFrequency();
 public:
     byte en_a, en_b;
     volatile int rpm;

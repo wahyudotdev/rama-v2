@@ -32,6 +32,7 @@ void timerIsr()
 
 void setup()
 {
+  
   Serial.begin(9600);
   Serial2.begin(115200);
   Serial2.print("bolt");
@@ -50,7 +51,7 @@ void setup()
   attachInterrupt(digitalPinToInterrupt(m4.en_a), EN4, FALLING);
 #endif
 #if (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
-  // Timer1.attachInterrupt(timerIsr).start(SAMPLING_TIME * 1000);
+  Timer1.attachInterrupt(timerIsr).start(SAMPLING_TIME * 1000);
 #else
   Timer1.initialize(100000);
   Timer1.attachInterrupt(timerIsr);
@@ -59,14 +60,9 @@ void setup()
 
 void loop()
 {
-
   int y = ex7.y();
   int rotate = ex7.rotate();
   int cameraDeg = ex7.cameraDegree();
-  // base.rotateLeft(255);
-  // m1.speed(255);
-  // m2.speed(255);
-  // Serial.println("Aux 3 : "+(String)ex7.getAux3()+"  camera : "+(String)ex7.cameraDegree()+" connected : "+(String)ex7.connected);
   servo.write(cameraDeg);
   if (ex7.connected && (abs(y)> 50 || abs(rotate)> 50))
   {

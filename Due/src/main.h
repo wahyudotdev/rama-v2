@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Pwm.h>
 #define RAMAV2
 /*
     Untuk Due menggunakan DueTimer, untuk mega menggunakan
