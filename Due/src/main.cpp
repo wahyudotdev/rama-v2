@@ -32,7 +32,7 @@ void timerIsr()
 
 void setup()
 {
-  
+  // delay(5000);
   Serial.begin(9600);
   Serial2.begin(115200);
   Serial2.print("bolt");
@@ -50,12 +50,13 @@ void setup()
   attachInterrupt(digitalPinToInterrupt(m3.en_a), EN3, FALLING);
   attachInterrupt(digitalPinToInterrupt(m4.en_a), EN4, FALLING);
 #endif
-#if (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
-  Timer1.attachInterrupt(timerIsr).start(SAMPLING_TIME * 1000);
-#else
-  Timer1.initialize(100000);
-  Timer1.attachInterrupt(timerIsr);
-#endif
+// #if (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
+//   Timer1.attachInterrupt(timerIsr).start(SAMPLING_TIME * 1000);
+// #else
+//   Timer1.initialize(100000);
+//   Timer1.attachInterrupt(timerIsr);
+// #endif
+  Serial.println("READY");
 }
 
 void loop()

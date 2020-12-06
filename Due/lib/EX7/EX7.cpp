@@ -37,7 +37,7 @@ EX7::EX7(byte aux3, byte aux2, byte aux1, byte yaw, byte pitch, byte roll, byte 
 }
 
 int EX7::getAux1(){
-    Serial.flush();
+    // Serial.flush();
     return pulseInLong(aux1, HIGH);
 }
 int EX7::getAux2(){
@@ -50,7 +50,7 @@ int EX7::getAux2(){
     range nilai antara 990 - 1970
 */
 int EX7::getAux3(){
-    Serial.flush();
+    // Serial.flush();
     return pulseInLong(aux3, HIGH);
 }
 
@@ -59,7 +59,7 @@ int EX7::getAux3(){
     range nilai antara 980 - 1900
 */
 int EX7::getYaw(){
-    Serial.flush();
+    // Serial.flush();
     return pulseInLong(yaw, HIGH);
 }
 
@@ -68,7 +68,7 @@ int EX7::getYaw(){
     range nilai antara 990 - 1850
 */
 int EX7::getPitch(){
-    Serial.flush();
+    // Serial.flush();
     return pulseInLong(pitch, HIGH);
 }
 
@@ -80,7 +80,7 @@ int EX7::getRoll(){
     return pulseInLong(roll, HIGH);
 }
 int EX7::getThrot(){
-    Serial.flush();
+    // Serial.flush();
     return pulseInLong(throt, HIGH);
 }
 
@@ -91,7 +91,7 @@ int EX7::getThrot(){
 */
 int EX7::y()
 {
-    return map(getYaw(), 980, 1850, -255, 255);
+    return map(getYaw(), 980, 1850, 255, -255);
 }
 
 /*

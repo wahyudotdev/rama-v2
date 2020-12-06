@@ -16,7 +16,7 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin)
     pinMode(this->a_pin, OUTPUT);
     pinMode(this->b_pin, OUTPUT);
     pinMode(this->pwm_pin, OUTPUT);
-    setPwmFrequency();
+    // setPwmFrequency();
 }
 /*
     Mode dengan encoder
@@ -41,7 +41,7 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b)
     digitalWrite(this->a_pin, LOW);
     digitalWrite(this->b_pin, LOW);
     digitalWrite(this->pwm_pin, LOW);
-    setPwmFrequency();
+    // setPwmFrequency();
 }
 
 /*
@@ -69,7 +69,7 @@ Motor::Motor(byte a_pin, byte b_pin, byte pwm_pin, byte en_a, byte en_b, int ppr
     digitalWrite(this->a_pin, LOW);
     digitalWrite(this->b_pin, LOW);
     digitalWrite(this->pwm_pin, LOW);
-    setPwmFrequency();
+    // setPwmFrequency();
 }
 /*
     Kp, Ki, Kd, Windup

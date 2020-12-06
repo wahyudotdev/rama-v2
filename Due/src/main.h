@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <Pwm.h>
+// #include <Pwm.h>
 #define RAMAV2
 /*
     Untuk Due menggunakan DueTimer, untuk mega menggunakan
@@ -7,7 +7,11 @@
 */
 #if (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
 #include <FreeRTOS_ARM.h>
-
+#define SYSRESETREQ    (1<<2)
+#define VECTKEY        (0x05fa0000UL)
+#define VECTKEY_MASK   (0x0000ffffUL)
+#define AIRCR          (*(uint32_t*)0xe000ed0cUL) // fixed arch-defined address
+#define REQUEST_EXTERNAL_RESET (AIRCR=(AIRCR&VECTKEY_MASK)|VECTKEY|SYSRESETREQ)
 #else
 // #include <TimerOne.h>
 #endif
@@ -99,3 +103,4 @@ Servo servo;
 void EN1(void); void EN2(void); void timerIsr(void);
 
 volatile int x,y,rotate;
+unsigned long last, now;
