@@ -2,11 +2,22 @@
 #include <ESP8266WiFi.h>
 #include <Ticker.h>
 #include "uMQTTBroker.h"
+#include "subscribe.h"
 #define LED 2
 uMQTTBroker myBroker;
 Ticker tick;
-char ssid[] = "bolt";          // your network SSID (name)
-char pass[] = "11111111"; // your network password
+char ssid[] = "Telkom IoT"; // your network SSID (name)
+char pass[] = "0987654321"; // your network password
+char apssid[] = "RAMA";
+
+void startWiFiAP()
+{
+  WiFi.disconnect();
+  WiFi.softAPConfig(IPAddress(192, 168, 1, 1), IPAddress(192, 168, 1, 1), IPAddress(255, 255, 255, 0));
+  WiFi.hostname("rama");
+  WiFi.softAP(apssid, pass);
+  Serial.println("Soft AP Started");
+}
 void startWiFiClient()
 {
   pinMode(LED, OUTPUT);
@@ -18,21 +29,19 @@ void startWiFiClient()
     digitalWrite(LED, !digitalRead(LED));
     delay(300);
     Serial.print(".");
+    if (millis() > 10000)
+    {
+      startWiFiAP();
+      break;
+    }
   }
   digitalWrite(LED, LOW);
   Serial.println("WiFi connected");
   Serial.println("IP address: " + WiFi.localIP().toString());
 }
 
-void startWiFiAP()
+void ICACHE_RAM_ATTR gas()
 {
-  WiFi.softAP(ssid, pass);
-  Serial.println("AP started");
-  Serial.println("IP address: " + WiFi.softAPIP().toString());
-}
-
-
-void ICACHE_RAM_ATTR gas(){
   digitalWrite(LED, !digitalRead(LED));
 }
 void setup()
@@ -40,9 +49,9 @@ void setup()
   int wait_time_ms = 1;
   Serial.begin(115200);
   pinMode(LED, OUTPUT);
-  tick.attach_ms(wait_time_ms,gas);
+  tick.attach_ms(wait_time_ms, gas);
   Serial.println("Ready : ");
-  
+
   // while (true)
   // {
   //   if (Serial.available() > 0)
@@ -62,5 +71,6 @@ void setup()
 
 void loop()
 {
-  if(Serial.available()>0) myBroker.publish("data",Serial.readStringUntil('!'));
+  if (Serial.available() > 0)
+    myBroker.publish("encoder", Serial.readStringUntil('!'));
 }
