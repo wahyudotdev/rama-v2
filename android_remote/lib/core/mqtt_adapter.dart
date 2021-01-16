@@ -31,7 +31,7 @@ class MqttAdapter {
     Uint8List ascii = AsciiEncoder().convert(message);
     Uint8Buffer data = Uint8Buffer();
     data.addAll(ascii);
-    mqttState.client.publishMessage('rama', MqttQos.atMostOnce, data);
+    mqttState.client.publishMessage('controller', MqttQos.atMostOnce, data);
   }
 
   connect(String host, int port, {String username, String password}) async {
@@ -42,7 +42,8 @@ class MqttAdapter {
     this.client.onSubscribed = onSubscribed;
     this.client.secure = false;
     final connMessage = MqttConnectMessage()
-        .authenticateAs(username, password)
+        // .authenticateAs(
+        //     username == null ? "" : username, password == null ? "" : password)
         .withClientIdentifier('rama_android')
         .keepAliveFor(60)
         .startClean()
