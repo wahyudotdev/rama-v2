@@ -3,7 +3,7 @@
 #include "ESP8266WiFi.h"
 
 
-class Subscribe: public uMQTTBroker
+class MyBroker: public uMQTTBroker
 {
 public:
     virtual bool onConnect(IPAddress addr, uint16_t client_count) {
@@ -20,7 +20,6 @@ public:
       char data_str[length+1];
       os_memcpy(data_str, data, length);
       data_str[length] = '\0';
-      
       Serial.println("received topic '"+topic+"' with data '"+(String)data_str+"'");
     }
 };
