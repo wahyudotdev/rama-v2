@@ -60,7 +60,7 @@ background-color: #ffffff;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:white; border-radius:5;align:center</string>
+     <string notr="true">color:white; border-radius:5;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>

@@ -6,9 +6,9 @@ import logging
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
-from worker.main_window_worker import MainWindowWorker
-from ui.main_window import Ui_MainWindow
-from core.mqtt import Mqtt
+from .worker.main_window_worker import MainWindowWorker
+from .ui.main_window import Ui_MainWindow
+from .core.mqtt import Mqtt
 
 
 app = QtWidgets.QApplication(sys.argv)

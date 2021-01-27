@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'resource/mainwindow.ui'
+# Form implementation generated from reading ui file '.\rama\resource\mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.direction.setFont(font)
-        self.direction.setStyleSheet("color:white; border-radius:5;align:center")
+        self.direction.setStyleSheet("color:white; border-radius:5;")
         self.direction.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.direction.setFrameShadow(QtWidgets.QFrame.Plain)
         self.direction.setLineWidth(0)
