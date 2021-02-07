@@ -3,5 +3,5 @@
 
 ## Requirements
 - OpenCV v3 or latest (can be used with opencv python package)
-- Run :
-- - python -m rama
+## Usage :
+- python -m rama
