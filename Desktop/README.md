@@ -2,11 +2,11 @@
 ## Build with PyQt5
 
 ## Project structure
--    rama
--    ├───core  
--    ├───resource
--    ├───ui
--    -───worker
+\t    rama
+\t    ├───core  
+\t    ├───resource
+\t    ├───ui
+\t    -───worker
 
 - core :
 - - folder ini berisi program utama yang digunakan untuk pengambilan data kamera dan sensor
