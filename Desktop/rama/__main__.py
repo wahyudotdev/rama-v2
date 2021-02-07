@@ -36,15 +36,37 @@ def changeText(value):
     }
     ui.direction.setText(direction.get(value,''))
 
+@pyqtSlot(str)
+def rForward(value):
+    ui.rForward.setText(value)
+
+@pyqtSlot(str)
+def rBack(value):
+    ui.rBack.setText(value)
+
+@pyqtSlot(str)
+def rRight(value):
+    ui.rRight.setText(value)
+
+@pyqtSlot(str)
+def rLeft(value):
+    ui.rLeft.setText(value)
+
+
 if __name__ == "__main__":
     ui.setupUi(MainWindow)
-    videothread = VideoWorker()
-    videothread.change_pixmap_signal.connect(showVideo)
-    videothread.start()
-    # sensorthread = SensorWorker('127.0.0.1')
-    # sensorthread.start()
+
+    sensorthread = SensorWorker()
+    sensorthread.rForward.connect(rForward)
+    sensorthread.rBack.connect(rBack)
+    sensorthread.rRight.connect(rRight)
+    sensorthread.rLeft.connect(rLeft)
+    sensorthread.start()
     keyboardListener = KeyboardListenerWorker()
     keyboardListener.keypress_signal.connect(changeText)
     keyboardListener.start()
+    videothread = VideoWorker()
+    videothread.change_pixmap_signal.connect(showVideo)
+    videothread.start()
     MainWindow.show()
     sys.exit(app.exec_())

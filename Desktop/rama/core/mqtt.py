@@ -1,10 +1,9 @@
 import paho.mqtt.client as mqtt
 from time import sleep, time
 from threading import Thread
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
 
 class Mqtt(object):
-    def __init__(self, host, on_message):
+    def __init__(self, host, on_message=None):
         self.host = host
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
@@ -29,5 +28,5 @@ class Mqtt(object):
         self.client.connect(self.host, 1883, 3600)
 
     def publish(self, topic, payload):
-            self.client.publish(topic, payload)
+        self.client.publish(topic, payload)
         
