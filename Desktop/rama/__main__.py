@@ -1,23 +1,14 @@
 import sys
-from multiprocessing import Process
 import numpy as np
-from pynput.keyboard import Listener
-from pynput import keyboard
-import logging
-from time import sleep, time
-from threading import Thread
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
-from rama.worker import VideoWorker, SensorWorker, KeyboardListenerWorker
+from PyQt5.QtCore import pyqtSlot
+from rama.worker import VideoWorker, SensorWorker, KeyboardListenerWorker, SliderWorker
 from rama.ui import Ui_MainWindow
-from rama.core import Mqtt
-
 
 app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
-
 
 def convertCvToPixmap(img):
     return QtGui.QImage(img, img.shape[1], img.shape[0], QtGui.QImage.Format_RGB888).rgbSwapped()
@@ -28,13 +19,7 @@ def showVideo(cv_image):
 
 @pyqtSlot(str)
 def changeText(value):
-    direction = {
-        'Key.up' : "MAJU",
-        'Key.down': "MUNDUR",
-        'Key.right': "KANAN",
-        'Key.left': "KIRI"
-    }
-    ui.direction.setText(direction.get(value,''))
+    ui.direction.setText(value)
 
 @pyqtSlot(str)
 def rForward(value):
@@ -52,6 +37,13 @@ def rRight(value):
 def rLeft(value):
     ui.rLeft.setText(value)
 
+@pyqtSlot(str)
+def speed(value):
+    ui.horizontalSlider.setValue(int(value))
+
+@pyqtSlot(bool)
+def videoStatus(value):
+    ui.startVideo.setText('Stop video' if value else 'Start video')
 
 if __name__ == "__main__":
     ui.setupUi(MainWindow)
@@ -67,6 +59,12 @@ if __name__ == "__main__":
     keyboardListener.start()
     videothread = VideoWorker()
     videothread.change_pixmap_signal.connect(showVideo)
+    videothread.is_started_signal.connect(videoStatus)
     videothread.start()
+    sliderthread = SliderWorker()
+    sliderthread.speed.connect(speed)
+    sliderthread.start()
+    ui.startVideo.clicked.connect(videothread.toggleVideo)
+    ui.horizontalSlider.valueChanged.connect(sliderthread.publishSpeed)
     MainWindow.show()
     sys.exit(app.exec_())

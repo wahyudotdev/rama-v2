@@ -1,5 +1,6 @@
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
-from rama.core import Mqtt, Test
+from rama.core import Mqtt
+from rama.config import LoadConfig
 
 class SensorWorker(QThread):
     rForward    = pyqtSignal(str)
@@ -17,4 +18,5 @@ class SensorWorker(QThread):
             self.rLeft.emit(f'{data[4]} cm')
     
     def run(self):
-        self.mqtt = Mqtt('127.0.0.1', self.on_message)
+        self.config = LoadConfig()
+        self.mqtt = Mqtt(self.config.mqtt_host, self.on_message)

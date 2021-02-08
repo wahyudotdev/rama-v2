@@ -1,25 +1,28 @@
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
 from rama.core import VideoStream
-# from rama.core import WebcamVideoStream
-
+from rama.config import LoadConfig
 import numpy as np
 
 class VideoWorker(QThread):
     change_pixmap_signal = pyqtSignal(np.ndarray)
-    # start_video = pyqtSignal(bool)
-    # rRight = pyqtSignal(str)
-    # rLeft = pyqtSignal(str)
-    # rForward = pyqtSignal(str)
-    # rBack = pyqtSignal(str)
+    is_started = False
+    is_started_signal = pyqtSignal(bool)
     def run(self):
-        frame = VideoStream('http://127.0.0.1:8000/video_feed')
+        self.config = LoadConfig()
         while True:
-            capture = frame.capture()
-            try:
-                self.change_pixmap_signal.emit(capture)
-            except Exception as e:
-                pass
-        frame.stop()
-    
-    def startVideo(self):
-        self.start_video.emit(true)
+            if(self.is_started):
+                self.frame = VideoStream(self.config.camera_host)
+                capture = self.frame.capture()
+                try:
+                    self.change_pixmap_signal.emit(capture)
+                except Exception as e:
+                    pass
+            else:
+                try:
+                    self.frame.stop()
+                except:
+                    pass
+
+    def toggleVideo(self):
+        self.is_started = not self.is_started
+        self.is_started_signal.emit(self.is_started)

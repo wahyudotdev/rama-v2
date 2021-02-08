@@ -96,27 +96,6 @@ class Ui_MainWindow(object):
 "color : white")
         self.rLeft.setAlignment(QtCore.Qt.AlignCenter)
         self.rLeft.setObjectName("rLeft")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 70, 151, 121))
-        self.label.setStyleSheet("background-color: rgba(170,170,170,0.37);\n"
-"border-radius: 5;\n"
-"color : white")
-        self.label.setText("")
-        self.label.setObjectName("label")
-        self.startVideo = QtWidgets.QTextBrowser(self.centralwidget)
-        self.startVideo.setGeometry(QtCore.QRect(630, 530, 141, 31))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
-        self.startVideo.setFont(font)
-        self.startVideo.setStyleSheet("color:white; border-radius:10;background-color:#52CCC7")
-        self.startVideo.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.startVideo.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.startVideo.setLineWidth(0)
-        self.startVideo.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.startVideo.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.startVideo.setObjectName("startVideo")
         self.direction_2 = QtWidgets.QTextBrowser(self.centralwidget)
         self.direction_2.setGeometry(QtCore.QRect(20, 510, 201, 71))
         font = QtGui.QFont()
@@ -135,16 +114,19 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setGeometry(QtCore.QRect(30, 550, 181, 22))
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
+        self.startVideo = QtWidgets.QPushButton(self.centralwidget)
+        self.startVideo.setGeometry(QtCore.QRect(640, 520, 121, 41))
+        self.startVideo.setStyleSheet("color:white; border-radius:5;background-color:rgba(82,204,199,0.53)")
+        self.startVideo.setObjectName("startVideo")
         self.video.raise_()
         self.rForward.raise_()
         self.direction.raise_()
         self.rRight.raise_()
         self.rBack.raise_()
         self.rLeft.raise_()
-        self.label.raise_()
-        self.startVideo.raise_()
         self.direction_2.raise_()
         self.horizontalSlider.raise_()
+        self.startVideo.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -157,21 +139,17 @@ class Ui_MainWindow(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:20pt; font-weight:600; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\';\">ARAH</span></p></body></html>"))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\';\">STOP</span></p></body></html>"))
         self.rForward.setText(_translate("MainWindow", "0 CM"))
         self.rRight.setText(_translate("MainWindow", "0 CM"))
         self.rBack.setText(_translate("MainWindow", "0 CM"))
         self.rLeft.setText(_translate("MainWindow", "0 CM"))
-        self.startVideo.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:20pt; font-weight:600; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt; color:#ffffff;\">START VIDEO</span></p></body></html>"))
         self.direction_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:20pt; font-weight:600; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#ffffff;\">SPEED</span></p></body></html>"))
+        self.startVideo.setText(_translate("MainWindow", "START VIDEO"))
 
 
 if __name__ == "__main__":

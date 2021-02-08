@@ -2,6 +2,8 @@ import cv2
 import urllib.request
 from threading import Thread
 import numpy as np
+import imutils
+
 class VideoStream(object):
     def __init__(self, url):
         try:
@@ -17,6 +19,7 @@ class VideoStream(object):
         try:
             # Using raspberry
             ret, frame = self.stream.read()
+            frame = imutils.resize(frame, width=800)
             return frame
             # Using ESP32
             # self.total_bytes += self.stream.read(1024)
