@@ -37,9 +37,9 @@ def rRight(value):
 def rLeft(value):
     ui.rLeft.setText(value)
 
-@pyqtSlot(str)
-def speed(value):
-    ui.horizontalSlider.setValue(int(value))
+# @pyqtSlot(str)
+# def speed(value):
+#     ui.horizontalSlider.setValue(int(value))
 
 @pyqtSlot(bool)
 def videoStatus(value):
@@ -47,7 +47,6 @@ def videoStatus(value):
 
 if __name__ == "__main__":
     ui.setupUi(MainWindow)
-
     sensorthread = SensorWorker()
     sensorthread.rForward.connect(rForward)
     sensorthread.rBack.connect(rBack)
@@ -57,14 +56,15 @@ if __name__ == "__main__":
     keyboardListener = KeyboardListenerWorker()
     keyboardListener.keypress_signal.connect(changeText)
     keyboardListener.start()
+
+    # sliderthread = SliderWorker()
+    # sliderthread.speed.connect(speed)
+    # sliderthread.start()
     videothread = VideoWorker()
     videothread.change_pixmap_signal.connect(showVideo)
     videothread.is_started_signal.connect(videoStatus)
     videothread.start()
-    sliderthread = SliderWorker()
-    sliderthread.speed.connect(speed)
-    sliderthread.start()
     ui.startVideo.clicked.connect(videothread.toggleVideo)
-    ui.horizontalSlider.valueChanged.connect(sliderthread.publishSpeed)
+    # ui.horizontalSlider.valueChanged.connect(sliderthread.publishSpeed)
     MainWindow.show()
     sys.exit(app.exec_())

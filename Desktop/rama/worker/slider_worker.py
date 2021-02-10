@@ -1,6 +1,7 @@
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
 from rama.core import Mqtt
 from rama.config import LoadConfig
+import json
 class SliderWorker(QThread):
     speed = pyqtSignal(str)
     def run(self):
@@ -10,6 +11,7 @@ class SliderWorker(QThread):
         self.publishSpeed(self.config.speed)
     
     def publishSpeed(self, speed):
-        self.mqtt.publish("speed", speed)
+        s = int(float(speed)/100 * 255)
+        self.mqtt.publish("controller", "{\"speed\":"+str(s)+"}" )
         self.speed.emit(str(speed))
         self.config.saveSpeed(speed)
