@@ -100,6 +100,18 @@ class Ui_MainWindow(object):
         self.startVideo.setGeometry(QtCore.QRect(640, 520, 121, 41))
         self.startVideo.setStyleSheet("color:white; border-radius:5;background-color:rgba(82,204,199,0.53)")
         self.startVideo.setObjectName("startVideo")
+        self.connectionState = QtWidgets.QLabel(self.centralwidget)
+        self.connectionState.setGeometry(QtCore.QRect(20, 50, 151, 31))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        font.setBold(True)
+        font.setWeight(75)
+        self.connectionState.setFont(font)
+        self.connectionState.setStyleSheet("background-color: rgba(170,170,170,0.37);\n"
+"border-radius: 5;\n"
+"color : white")
+        self.connectionState.setAlignment(QtCore.Qt.AlignCenter)
+        self.connectionState.setObjectName("connectionState")
         self.video.raise_()
         self.rForward.raise_()
         self.direction.raise_()
@@ -107,6 +119,7 @@ class Ui_MainWindow(object):
         self.rBack.raise_()
         self.rLeft.raise_()
         self.startVideo.raise_()
+        self.connectionState.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -125,6 +138,7 @@ class Ui_MainWindow(object):
         self.rBack.setText(_translate("MainWindow", "0 CM"))
         self.rLeft.setText(_translate("MainWindow", "0 CM"))
         self.startVideo.setText(_translate("MainWindow", "START VIDEO"))
+        self.connectionState.setText(_translate("MainWindow", "Terputus"))
 
 
 if __name__ == "__main__":

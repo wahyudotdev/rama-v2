@@ -218,6 +218,34 @@ color : white</string>
      <string>START VIDEO</string>
     </property>
    </widget>
+   <widget class="QLabel" name="connectionState">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,0.37);
+border-radius: 5;
+color : white</string>
+    </property>
+    <property name="text">
+     <string>not connected</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>video</zorder>
    <zorder>rForward</zorder>
    <zorder>direction</zorder>
@@ -225,6 +253,7 @@ color : white</string>
    <zorder>rBack</zorder>
    <zorder>rLeft</zorder>
    <zorder>startVideo</zorder>
+   <zorder>connectionState</zorder>
   </widget>
  </widget>
  <resources/>

@@ -62,14 +62,14 @@
 #elif defined(RAMAV2)
 #define EN1_A   2
 #define EN1_B   4
-#define M1_A    7
-#define M1_B    8
+#define M1_A    8
+#define M1_B    7
 #define M1_PWM  6
 
 #define EN2_A   3
 #define EN2_B   5
-#define M2_A    11
-#define M2_B    10
+#define M2_A    10
+#define M2_B    11
 #define M2_PWM  9
 // pin remot gan
 #define AUX3    52
@@ -81,6 +81,16 @@
 #define THROT   40
 
 #define ESP_IO  18
+
+#define TRIG1   23
+#define TRIG2   31
+#define TRIG3   27
+#define TRIG4   35
+
+#define ECHO1   25
+#define ECHO2   33
+#define ECHO3   29
+#define ECHO4   37
 
 #define srvPin  38
 #endif
@@ -106,15 +116,19 @@ Servo servo;
 void EN1(void); void EN2(void); void timerIsr(void);
 
 volatile int x,y,rotate;
-unsigned long last, now;
+uint32_t last=0, now;
 volatile bool isConnected;
 
 TaskHandle_t t_blink;
 TaskHandle_t t_controller;
 TaskHandle_t t_movement;
+TaskHandle_t t_ultrasonic;
 
 static void vBlink(void *parameters);
 static void vController(void *parameters);
-
+static void vUltrasonic(void *parameters);
+static int getRange(byte trig, byte echo);
 volatile int direction;
 volatile int camera;
+volatile int ultrasonic1, ultrasonic2, ultrasonic3, ultrasonic4;
+volatile int speed;

@@ -45,13 +45,18 @@ def rLeft(value):
 def videoStatus(value):
     ui.startVideo.setText('Stop video' if value else 'Start video')
 
-if __name__ == "__main__":
+@pyqtSlot(bool)
+def connectionStatus(value):
+    ui.connectionState.setText('Tersambung' if value else 'Terputus')
+
+def main():
     ui.setupUi(MainWindow)
     sensorthread = SensorWorker()
     sensorthread.rForward.connect(rForward)
     sensorthread.rBack.connect(rBack)
     sensorthread.rRight.connect(rRight)
     sensorthread.rLeft.connect(rLeft)
+    sensorthread.is_connected.connect(connectionStatus)
     sensorthread.start()
     keyboardListener = KeyboardListenerWorker()
     keyboardListener.keypress_signal.connect(changeText)
@@ -68,3 +73,6 @@ if __name__ == "__main__":
     # ui.horizontalSlider.valueChanged.connect(sliderthread.publishSpeed)
     MainWindow.show()
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()

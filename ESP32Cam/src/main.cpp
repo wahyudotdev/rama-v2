@@ -66,6 +66,7 @@ void enableMqtt()
     {
         Serial.println("MQTT CONNECTED");
         mqttClient.subscribe("camera_on");
+        mqttClient.setKeepAlive(3600);
     }
 }
 
@@ -134,6 +135,28 @@ void lcdMessage(String msg)
 #endif
 }
 
+void initWifi(){
+    unsigned long now = millis();
+    IPAddress ip;
+    lcdMessage(String("join ") + ssid);
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        delay(500);
+        Serial.print(F("."));
+        if(millis()-now>3000) ESP.restart();
+    }
+    ip = WiFi.localIP();
+    Serial.println(F("WiFi connected"));
+    Serial.println("");
+    Serial.println(ip);
+    Serial.print("Stream Link: rtsp://");
+    Serial.print(ip);
+    Serial.println(":8554/mjpeg/1");
+    lcdMessage(ip.toString());    
+    enableMqtt();
+}
 void setup()
 {
 #ifdef ENABLE_OLED
@@ -181,55 +204,7 @@ void setup()
 #endif
 
     cam.init(config);
-
-    IPAddress ip;
-
-#ifdef SOFTAP_MODE
-    const char *hostname = "devcam";
-    // WiFi.hostname(hostname); // FIXME - find out why undefined
-    lcdMessage("starting softAP");
-    WiFi.mode(WIFI_AP);
-
-    bool result = WiFi.softAP(hostname, "12345678", 1, 0);
-    delay(2000);
-    WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
-
-    if (!result)
-    {
-        Serial.println("AP Config failed.");
-        return;
-    }
-    else
-    {
-        Serial.println("AP Config Success.");
-        Serial.print("AP MAC: ");
-        Serial.println(WiFi.softAPmacAddress());
-
-        ip = WiFi.softAPIP();
-
-        Serial.print("Stream Link: rtsp://");
-        Serial.print(ip);
-        Serial.println(":8554/mjpeg/1");
-    }
-#else
-    lcdMessage(String("join ") + ssid);
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(500);
-        Serial.print(F("."));
-    }
-    ip = WiFi.localIP();
-    Serial.println(F("WiFi connected"));
-    Serial.println("");
-    Serial.println(ip);
-    Serial.print("Stream Link: rtsp://");
-    Serial.print(ip);
-    Serial.println(":8554/mjpeg/1");
-#endif
-
-    lcdMessage(ip.toString());
+    initWifi();
 
 #ifdef ENABLE_WEBSERVER
     server.on("/", HTTP_GET, handle_jpg_stream);
@@ -237,7 +212,7 @@ void setup()
     server.onNotFound(handleNotFound);
     server.begin();
 #endif
-    enableMqtt();
+
 #ifdef ENABLE_RTSPSERVER
     rtspServer.begin();
 #endif
@@ -249,53 +224,12 @@ CRtspSession *session;
 
 void loop()
 {
+    if(WiFi.status()!= WL_CONNECTED){
+        Serial.println("DC Coks");
+        initWifi();
+    }
     mqttClient.loop();
 #ifdef ENABLE_WEBSERVER
     server.handleClient();
-#endif
-
-#ifdef ENABLE_RTSPSERVER
-    uint32_t msecPerFrame = 100;
-    static uint32_t lastimage = millis();
-
-    // If we have an active client connection, just service that until gone
-    // (FIXME - support multiple simultaneous clients)
-    if (session)
-    {
-        session->handleRequests(0); // we don't use a timeout here,
-        // instead we send only if we have new enough frames
-
-        uint32_t now = millis();
-        if (now > lastimage + msecPerFrame || now < lastimage)
-        { // handle clock rollover
-            session->broadcastCurrentFrame(now);
-            lastimage = now;
-
-            // check if we are overrunning our max frame rate
-            now = millis();
-            if (now > lastimage + msecPerFrame)
-                printf("warning exceeding max frame rate of %d ms\n", now - lastimage);
-        }
-
-        if (session->m_stopped)
-        {
-            delete session;
-            delete streamer;
-            session = NULL;
-            streamer = NULL;
-        }
-    }
-    else
-    {
-        client = rtspServer.accept();
-
-        if (client)
-        {
-            //streamer = new SimStreamer(&client, true);             // our streamer for UDP/TCP based RTP transport
-            streamer = new OV2640Streamer(&client, cam); // our streamer for UDP/TCP based RTP transport
-
-            session = new CRtspSession(&client, streamer); // our threads RTSP session and state
-        }
-    }
 #endif
 }

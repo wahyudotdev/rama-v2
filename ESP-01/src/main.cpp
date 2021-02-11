@@ -4,17 +4,17 @@
 #include "subscribe.h"
 #include <PubSubClient.h>
 #define LED 2
-#define MQTT_BROKER "192.168.43.44"
+#define MQTT_BROKER "192.168.0.100"
 #define MQTT_PORT 1883
 // Apabila konek ke hotspot maka status false, jika AP aktif maka true
 bool isSoftAp;
 MyBroker myBroker;
 WiFiClient espClient;
 PubSubClient client(espClient);
-char ssid[] = "bolt";     // your network SSID (name)
-char pass[] = "11111111"; // your network password
+char ssid[] = "RAMA-V2";    // your network SSID (name)
+char pass[] = "0987654321"; // your network password
 char apssid[] = "RAMA";
-char *topic="rama";
+char *topic = "rama";
 
 void callback(char *topic, byte *payload, unsigned int length)
 {
@@ -62,7 +62,7 @@ void startWiFiClient()
 
 void setup()
 {
-    Serial.begin(115200);   
+    Serial.begin(115200);
     pinMode(LED, OUTPUT);
     digitalWrite(LED, HIGH);
     startWiFiClient();
@@ -71,8 +71,14 @@ void setup()
 
 void loop()
 {
-    if(WiFi.status() != WL_CONNECTED){
+    if (WiFi.status() != WL_CONNECTED)
+    {
         startWiFiClient();
+    }
+    if (client.state() != MQTT_CONNECTED)
+    {
+        client.connect("rama_bot");
+        client.subscribe("controller");
     }
     if (Serial.available() > 0)
     {

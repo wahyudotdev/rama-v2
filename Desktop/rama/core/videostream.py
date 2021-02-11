@@ -19,7 +19,9 @@ class VideoStream(object):
         try:
             # Using raspberry
             ret, frame = self.stream.read()
+            frame = cv2.flip(frame, -1)
             frame = imutils.resize(frame, width=800)
+            frame = imutils.rotate(frame, -90)
             return frame
             # Using ESP32
             # self.total_bytes += self.stream.read(1024)
