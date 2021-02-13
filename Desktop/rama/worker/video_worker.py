@@ -1,5 +1,5 @@
 from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
-from rama.core import VideoStream
+from rama.core import VideoStream, UdpStream
 from rama.config import LoadConfig
 import numpy as np
 
@@ -9,9 +9,9 @@ class VideoWorker(QThread):
     is_started_signal = pyqtSignal(bool)
     def run(self):
         self.config = LoadConfig()
+        self.frame = UdpStream("192.168.43.44")
         while True:
             if(self.is_started):
-                self.frame = VideoStream(self.config.camera_host)
                 capture = self.frame.capture()
                 try:
                     self.change_pixmap_signal.emit(capture)
