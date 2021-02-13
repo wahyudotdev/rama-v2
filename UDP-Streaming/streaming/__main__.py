@@ -5,7 +5,7 @@ import math
 import pickle
 import sys
 import imutils
-from streaming.core.mqtt import Mqtt
+from core.mqtt import Mqtt
 from threading import Thread
 
 max_length = 65000
@@ -50,7 +50,6 @@ def start_stream():
 
 def on_message(client, userdata, msg):
     payload = msg.payload.decode('utf-8')
-    print(payload)
     global host
     host = str(payload)
 
