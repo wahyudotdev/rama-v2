@@ -1,3 +1,4 @@
+from time import sleep
 from PyQt5.QtCore import pyqtSignal, QThread
 from cv2 import data
 from rama.core import UdpStream, Mqtt
@@ -31,6 +32,7 @@ class VideoWorker(QThread):
                     self.frame.stop()
                 except:
                     pass
+                sleep(0.5)
 
     def toggleVideo(self):
         self.is_started = not self.is_started

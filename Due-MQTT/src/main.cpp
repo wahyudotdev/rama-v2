@@ -30,12 +30,7 @@ static void vController(void *parameters)
       if (!error)
       {
         direction = doc["dir"];
-        camera = doc["cam"];
-        // speed = doc["speed"]>0?doc["speed"]:speed=150;
-        if (doc["speed"] > 0)
-        {
-          speed = doc["speed"];
-        }
+        speed = (doc["speed"].as<int>() /100.00) *255;
         last = millis();
       }
     }
@@ -50,23 +45,23 @@ static void vMovement(void *parameters)
     // servo.write(camera);
     if (direction == 1)
     {
-      Serial.println("MAJU");
-      base.forward(255);
+      Serial.println("MAJU "+(String)speed);
+      base.forward(speed);
     }
     if (direction == 2)
     {
-      Serial.println("KANAN");
-      base.rotateRight(255);
+      Serial.println("KANAN "+(String)speed);
+      base.rotateRight(speed);
     }
     if (direction == 3)
     {
-      Serial.println("MUNDUR");
-      base.reverse(255);
+      Serial.println("MUNDUR "+(String)speed);
+      base.reverse(speed);
     }
     if (direction == 4)
     {
-      Serial.println("KIRI");
-      base.rotateLeft(255);
+      Serial.println("KIRI "+(String)speed);
+      base.rotateLeft(speed);
     }
     if (direction == 0)
     {
@@ -107,7 +102,7 @@ void vUltrasonic(void *parameters)
     vTaskDelay(50);
     ultrasonic4 = getRange(TRIG4, ECHO4);
     vTaskDelay(50);
-    Serial.println(String(ultrasonic1)+","+(String)ultrasonic2+","+(String)ultrasonic3+","+(String)ultrasonic4);
+    // Serial.println(String(ultrasonic1)+","+(String)ultrasonic2+","+(String)ultrasonic3+","+(String)ultrasonic4);
   }
 }
 
@@ -156,8 +151,8 @@ void setup()
   //   delay(100);
   // }
 
-  attachInterrupt(digitalPinToInterrupt(m1.en_a), EN1, FALLING);
-  attachInterrupt(digitalPinToInterrupt(m2.en_a), EN2, FALLING);
+  // attachInterrupt(digitalPinToInterrupt(m1.en_a), EN1, FALLING);
+  // attachInterrupt(digitalPinToInterrupt(m2.en_a), EN2, FALLING);
 
   xTaskCreate(vBlink,
               "Blink",

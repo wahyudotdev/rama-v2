@@ -126,7 +126,7 @@ class Ui_MainWindow(object):
         self.videoState.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.videoState.setObjectName("videoState")
         self.rRight_2 = QtWidgets.QLabel(self.centralwidget)
-        self.rRight_2.setGeometry(QtCore.QRect(580, 10, 211, 171))
+        self.rRight_2.setGeometry(QtCore.QRect(580, 10, 211, 181))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(True)
@@ -198,6 +198,10 @@ class Ui_MainWindow(object):
 "color : white")
         self.connectionState_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.connectionState_3.setObjectName("connectionState_3")
+        self.changeSpeed = QtWidgets.QPushButton(self.centralwidget)
+        self.changeSpeed.setGeometry(QtCore.QRect(20, 60, 151, 41))
+        self.changeSpeed.setStyleSheet("color:white; border-radius:5;background-color:rgba(82,204,199,0.53)")
+        self.changeSpeed.setObjectName("changeSpeed")
         self.video.raise_()
         self.rRight_2.raise_()
         self.rForward.raise_()
@@ -213,6 +217,7 @@ class Ui_MainWindow(object):
         self.latencyEsp.raise_()
         self.connectionState_2.raise_()
         self.connectionState_3.raise_()
+        self.changeSpeed.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -238,6 +243,7 @@ class Ui_MainWindow(object):
         self.latencyEsp.setText(_translate("MainWindow", "ESP NC"))
         self.connectionState_2.setText(_translate("MainWindow", "CONTROLLER"))
         self.connectionState_3.setText(_translate("MainWindow", "VIDEO"))
+        self.changeSpeed.setText(_translate("MainWindow", "SPEED : 0"))
 
 
 if __name__ == "__main__":

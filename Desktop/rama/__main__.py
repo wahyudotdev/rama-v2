@@ -1,14 +1,21 @@
 import sys
 import numpy as np
-
+from time import sleep
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSlot
-from rama.worker import VideoWorker, SensorWorker, KeyboardListenerWorker, ConnectionWorker
-from rama.ui import Ui_MainWindow
+from rama.worker import VideoWorker, SensorWorker, ControllerWorker, ConnectionWorker
+from rama.ui import Ui_MainWindow, SpeedWindow, speed_window
 
 app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
+speedwindow = SpeedWindow()
+
+# worker
+connectionthread = None
+sensorthread = None
+controller = None
+videothread = None
 
 def convertCvToPixmap(img):
     return QtGui.QImage(img, img.shape[1], img.shape[0], QtGui.QImage.Format_RGB888).rgbSwapped()
@@ -37,10 +44,6 @@ def rRight(value):
 def rLeft(value):
     ui.rLeft.setText(value)
 
-# @pyqtSlot(str)
-# def speed(value):
-#     ui.horizontalSlider.setValue(int(value))
-
 @pyqtSlot(bool)
 def switchVideo(value):
     ui.startVideo.setText('Stop video' if value else 'Start video')
@@ -65,28 +68,46 @@ def rpiLatency(value):
     ui.latencyRpi.setText(f'RPi {value} ms')
     ui.latencyRpi.setMargin(5)
 
+def setSpeed():
+    speed = speedwindow.getInteger()
+    if(speed != None):
+        controller.change_speed(speed)
+        ui.changeSpeed.setText(f'SPEED : {speed}')
+
 def main():
     ui.setupUi(MainWindow)
+    global connectionthread
     connectionthread = ConnectionWorker()
     connectionthread.signal_esp_connected.connect(espStatus)
     connectionthread.signal_esp_latency.connect(espLatency)
     connectionthread.signal_rpi_connected.connect(rpiStatus)
     connectionthread.signal_rpi_latency.connect(rpiLatency)
     connectionthread.start()
+
+    global sensorthread
     sensorthread = SensorWorker()
     sensorthread.rForward.connect(rForward)
     sensorthread.rBack.connect(rBack)
     sensorthread.rRight.connect(rRight)
     sensorthread.rLeft.connect(rLeft)
     sensorthread.start()
-    keyboardListener = KeyboardListenerWorker()
-    keyboardListener.keypress_signal.connect(changeText)
-    keyboardListener.start()
+
+    global controller
+    controller = ControllerWorker()
+    controller.keypress_signal.connect(changeText)
+    controller.start()
+
+    global videothread
     videothread = VideoWorker()
     videothread.change_pixmap_signal.connect(showVideo)
     videothread.is_started_signal.connect(switchVideo)
     videothread.start()
+
     ui.startVideo.clicked.connect(videothread.toggleVideo)
+    ui.changeSpeed.clicked.connect(setSpeed)
+
+    sleep(0.1)
+    ui.changeSpeed.setText(f'SPEED : {controller.speed}')
     MainWindow.show()
     sys.exit(app.exec_())
 

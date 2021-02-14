@@ -292,7 +292,7 @@ color : white</string>
       <x>580</x>
       <y>10</y>
       <width>211</width>
-      <height>171</height>
+      <height>181</height>
      </rect>
     </property>
     <property name="font">
@@ -460,6 +460,22 @@ color : white</string>
      <number>10</number>
     </property>
    </widget>
+   <widget class="QPushButton" name="changeSpeed">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:white; border-radius:5;background-color:rgba(82,204,199,0.53)</string>
+    </property>
+    <property name="text">
+     <string>SPEED : 0</string>
+    </property>
+   </widget>
    <zorder>video</zorder>
    <zorder>rRight_2</zorder>
    <zorder>rForward</zorder>
@@ -475,6 +491,7 @@ color : white</string>
    <zorder>latencyEsp</zorder>
    <zorder>connectionState_2</zorder>
    <zorder>connectionState_3</zorder>
+   <zorder>changeSpeed</zorder>
   </widget>
  </widget>
  <resources/>

@@ -11,14 +11,6 @@ class Mqtt(object):
         self.client.on_message = on_message
         self.client.on_disconnect = on_disconnect
         Thread(target=self.mqtt_connect, args=()).start()
-
-    # def on_connect(self, client, userdata, flags, rc):
-    #     try:
-    #         print("Connected")
-    #         self.client.subscribe('rama')
-    #     except:
-    #         print('gagal')
-    #         pass
     
     def mqtt_connect(self):
         while True:

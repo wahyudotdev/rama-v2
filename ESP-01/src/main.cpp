@@ -23,7 +23,7 @@ PubSubClient client(espClient);
 char ssid[] = "RAMA-V2";    // your network SSID (name)
 char pass[] = "0987654321"; // your network password
 char apssid[] = "RAMA";
-
+char *topic;
 void callback(char *topic, byte *payload, unsigned int length)
 {
     char buff[length];
@@ -64,7 +64,7 @@ void startWiFiClient()
         client.setServer(MQTT_BROKER, MQTT_PORT);
         client.setCallback(callback);
         client.connect("rama_bot");
-        client.subscribe("controller");
+        client.subscribe("rama/controller");
     }
     // Serial.println("IP address: " + WiFi.localIP().toString());
 }
