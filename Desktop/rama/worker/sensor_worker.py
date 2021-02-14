@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
+from PyQt5.QtCore import pyqtSignal, QThread
 from rama.core import Mqtt
 from rama.config import LoadConfig
 
@@ -7,7 +7,6 @@ class SensorWorker(QThread):
     rBack       = pyqtSignal(str)
     rRight      = pyqtSignal(str)
     rLeft       = pyqtSignal(str)
-    is_connected = pyqtSignal(bool)
     def on_message(self,client, userdata, msg):
         payload = msg.payload.decode('utf-8')
         data = str(payload).split(',')
@@ -20,8 +19,7 @@ class SensorWorker(QThread):
     def on_connect(self, client, userdata, flags, rc):
         try:
             print("Connected")
-            client.subscribe('rama')
-            self.is_connected.emit(True)
+            client.subscribe('rama/sensor')
         except:
             print('gagal')
             pass

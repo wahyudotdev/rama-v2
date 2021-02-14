@@ -3,7 +3,7 @@ import numpy as np
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSlot
-from rama.worker import VideoWorker, SensorWorker, KeyboardListenerWorker, SliderWorker
+from rama.worker import VideoWorker, SensorWorker, KeyboardListenerWorker, ConnectionWorker
 from rama.ui import Ui_MainWindow
 
 app = QtWidgets.QApplication(sys.argv)
@@ -42,35 +42,51 @@ def rLeft(value):
 #     ui.horizontalSlider.setValue(int(value))
 
 @pyqtSlot(bool)
-def videoStatus(value):
+def switchVideo(value):
     ui.startVideo.setText('Stop video' if value else 'Start video')
 
 @pyqtSlot(bool)
-def connectionStatus(value):
-    ui.connectionState.setText('Tersambung' if value else 'Terputus')
+def espStatus(value):
+    ui.contollerState.setText('ONLINE' if value else 'OFFLINE')
+    ui.contollerState.setMargin(5)
+
+@pyqtSlot(str)
+def espLatency(value):
+    ui.latencyEsp.setText(f'ESP {value} ms')
+    ui.latencyEsp.setMargin(5)
+
+@pyqtSlot(bool)
+def rpiStatus(value):
+    ui.videoState.setText('ONLINE' if value else 'OFFLINE')
+    ui.videoState.setMargin(5)
+
+@pyqtSlot(str)
+def rpiLatency(value):
+    ui.latencyRpi.setText(f'RPi {value} ms')
+    ui.latencyRpi.setMargin(5)
 
 def main():
     ui.setupUi(MainWindow)
+    connectionthread = ConnectionWorker()
+    connectionthread.signal_esp_connected.connect(espStatus)
+    connectionthread.signal_esp_latency.connect(espLatency)
+    connectionthread.signal_rpi_connected.connect(rpiStatus)
+    connectionthread.signal_rpi_latency.connect(rpiLatency)
+    connectionthread.start()
     sensorthread = SensorWorker()
     sensorthread.rForward.connect(rForward)
     sensorthread.rBack.connect(rBack)
     sensorthread.rRight.connect(rRight)
     sensorthread.rLeft.connect(rLeft)
-    sensorthread.is_connected.connect(connectionStatus)
     sensorthread.start()
     keyboardListener = KeyboardListenerWorker()
     keyboardListener.keypress_signal.connect(changeText)
     keyboardListener.start()
-
-    # sliderthread = SliderWorker()
-    # sliderthread.speed.connect(speed)
-    # sliderthread.start()
     videothread = VideoWorker()
     videothread.change_pixmap_signal.connect(showVideo)
-    videothread.is_started_signal.connect(videoStatus)
+    videothread.is_started_signal.connect(switchVideo)
     videothread.start()
     ui.startVideo.clicked.connect(videothread.toggleVideo)
-    # ui.horizontalSlider.valueChanged.connect(sliderthread.publishSpeed)
     MainWindow.show()
     sys.exit(app.exec_())
 

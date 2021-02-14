@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
+from PyQt5.QtCore import pyqtSignal, QThread
 from pynput.keyboard import Listener
 from rama.core import Mqtt
 from rama.config import LoadConfig
@@ -36,6 +36,6 @@ class KeyboardListenerWorker(QThread):
         }
         try:
             self.keypress_signal.emit(directionText.get(payload, 'STOP'))
-            self.mqtt.publish('controller', direction.get(payload, 'STOP'))
+            self.mqtt.publish('rama/controller', direction.get(payload, 'STOP'))
         except:
             pass

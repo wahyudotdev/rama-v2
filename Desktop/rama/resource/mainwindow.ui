@@ -42,10 +42,16 @@
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: transparent;</string>
+     <string notr="true">background-color: black;</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <property name="indent">
+     <number>-1</number>
     </property>
    </widget>
    <widget class="QTextBrowser" name="direction">
@@ -218,13 +224,75 @@ color : white</string>
      <string>START VIDEO</string>
     </property>
    </widget>
-   <widget class="QLabel" name="connectionState">
+   <widget class="QLabel" name="contollerState">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>50</y>
-      <width>151</width>
+      <x>700</x>
+      <y>20</y>
+      <width>81</width>
       <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,0.37);
+border-radius: 5;
+color : white</string>
+    </property>
+    <property name="text">
+     <string> OFFLINE</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="margin">
+     <number>5</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="videoState">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>60</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,0.37);
+border-radius: 5;
+color : white</string>
+    </property>
+    <property name="text">
+     <string>OFFLINE</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="margin">
+     <number>10</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="rRight_2">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>10</y>
+      <width>211</width>
+      <height>171</height>
      </rect>
     </property>
     <property name="font">
@@ -240,20 +308,173 @@ border-radius: 5;
 color : white</string>
     </property>
     <property name="text">
-     <string>not connected</string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="videoState_2">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>100</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,0.37);
+border-radius: 5;
+color : white</string>
+    </property>
+    <property name="text">
+     <string>LATENCY</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="latencyRpi">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>140</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>7</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,0.37);
+border-radius: 5;
+color : white</string>
+    </property>
+    <property name="text">
+     <string>RPI NC</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="latencyEsp">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>140</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>7</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,0.37);
+border-radius: 5;
+color : white</string>
+    </property>
+    <property name="text">
+     <string>ESP NC</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="connectionState_2">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>20</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,0.37);
+border-radius: 5;
+color : white</string>
+    </property>
+    <property name="text">
+     <string>CONTROLLER</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="margin">
+     <number>9</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="connectionState_3">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>60</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(170,170,170,0.37);
+border-radius: 5;
+color : white</string>
+    </property>
+    <property name="text">
+     <string>VIDEO</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="margin">
+     <number>10</number>
+    </property>
+   </widget>
    <zorder>video</zorder>
+   <zorder>rRight_2</zorder>
    <zorder>rForward</zorder>
    <zorder>direction</zorder>
    <zorder>rRight</zorder>
    <zorder>rBack</zorder>
    <zorder>rLeft</zorder>
    <zorder>startVideo</zorder>
-   <zorder>connectionState</zorder>
+   <zorder>contollerState</zorder>
+   <zorder>videoState</zorder>
+   <zorder>videoState_2</zorder>
+   <zorder>latencyRpi</zorder>
+   <zorder>latencyEsp</zorder>
+   <zorder>connectionState_2</zorder>
+   <zorder>connectionState_3</zorder>
   </widget>
  </widget>
  <resources/>

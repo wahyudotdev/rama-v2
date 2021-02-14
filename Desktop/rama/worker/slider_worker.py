@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSignal, pyqtSlot, Qt, QThread
+from PyQt5.QtCore import pyqtSignal, QThread
 from rama.core import Mqtt
 from rama.config import LoadConfig
 import json

@@ -1,11 +1,20 @@
+/*
+RX      3v3
+IO0     RST
+IO2     EN
+GND     TX
+
+*/
+
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include "uMQTTBroker.h"
 #include "subscribe.h"
 #include <PubSubClient.h>
-#define LED 2
-#define MQTT_BROKER "192.168.0.100"
-#define MQTT_PORT 1883
+#define LED         2
+#define MQTT_BROKER "192.168.254.100"
+#define MQTT_PORT   1883
+const char id[5]=          "rama";
 // Apabila konek ke hotspot maka status false, jika AP aktif maka true
 bool isSoftAp;
 MyBroker myBroker;
@@ -14,7 +23,6 @@ PubSubClient client(espClient);
 char ssid[] = "RAMA-V2";    // your network SSID (name)
 char pass[] = "0987654321"; // your network password
 char apssid[] = "RAMA";
-char *topic = "rama";
 
 void callback(char *topic, byte *payload, unsigned int length)
 {
@@ -50,6 +58,7 @@ void startWiFiClient()
         delay(300);
         digitalWrite(LED, !digitalRead(LED));
     }
+    // WiFi.config(IPAddress(192,168,254,101), IPAddress(192,168,254,254), IPAddress(255,255,255,0));
     if (isSoftAp == false)
     {
         client.setServer(MQTT_BROKER, MQTT_PORT);
@@ -69,8 +78,13 @@ void setup()
     digitalWrite(LED, LOW);
 }
 
+unsigned long last;
 void loop()
 {
+    if(millis()-last > 1000){
+        client.publish("rama/ip",WiFi.localIP().toString().c_str());
+        last = millis();
+    }
     if (WiFi.status() != WL_CONNECTED)
     {
         startWiFiClient();
@@ -78,17 +92,17 @@ void loop()
     if (client.state() != MQTT_CONNECTED)
     {
         client.connect("rama_bot");
-        client.subscribe("controller");
+        client.subscribe("rama/controller");
     }
     if (Serial.available() > 0)
     {
         if (isSoftAp)
         {
-            myBroker.publish(topic, Serial.readStringUntil('!'));
+            myBroker.publish("rama/sensor", Serial.readStringUntil('!'));
         }
         else
         {
-            client.publish(topic, Serial.readStringUntil('!').c_str());
+            client.publish("rama/sensor", Serial.readStringUntil('!').c_str());
         }
     }
     if (isSoftAp == false)

@@ -6,6 +6,7 @@ class Mqtt(object):
     def __init__(self, host, on_message=None, on_connect=None, on_disconnect=None):
         self.host = host
         self.client = mqtt.Client()
+        self.client.will_set('dc','putus gaes')
         self.client.on_connect = on_connect
         self.client.on_message = on_message
         self.client.on_disconnect = on_disconnect

@@ -14,26 +14,27 @@ class UdpStream(object):
         print("-> waiting for connection")
 
     def capture(self):
-        frame = None
-        data, address = self.sock.recvfrom(self.max_length)
-        if len(data) < 100:
-            frame_info = pickle.loads(data)
+        try:
+            frame = None
+            data, address = self.sock.recvfrom(self.max_length)
+            if len(data) < 100:
+                frame_info = pickle.loads(data)
 
-            if frame_info:
-                nums_of_packs = frame_info["packs"]
+                if frame_info:
+                    nums_of_packs = frame_info["packs"]
 
-                for i in range(nums_of_packs):
-                    data, address = self.sock.recvfrom(self.max_length)
-                    if i == 0:
-                        buffer = data
-                    else:
-                        buffer += data
-                frame = np.frombuffer(buffer, dtype=np.uint8)
-                frame = frame.reshape(frame.shape[0], 1)
-                frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
-                frame = cv2.flip(frame, 1)
-                try:
+                    for i in range(nums_of_packs):
+                        data, address = self.sock.recvfrom(self.max_length)
+                        if i == 0:
+                            buffer = data
+                        else:
+                            buffer += data
+                    frame = np.frombuffer(buffer, dtype=np.uint8)
+                    frame = frame.reshape(frame.shape[0], 1)
+                    frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
+                    # frame = cv2.imdecode(frame, cv2.IMREAD_REDUCED_COLOR_2)
+                    frame = cv2.flip(frame, 1)
                     frame = imutils.resize(frame, width=800)
-                except:
-                    pass
-                return frame
+                    return frame
+        except:
+            pass
