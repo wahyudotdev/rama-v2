@@ -7,7 +7,7 @@ class SpeedWindow(QWidget):
         super().__init__()
 
     def getInteger(self):
-        i, okPressed = QInputDialog.getInt(self, "Enter speed","Percentage:", 28, 0, 100, 1)
+        i, okPressed = QInputDialog.getInt(self, "Enter speed","Percentage:", 0, 0, 100, 1)
         if okPressed:
             return i
     

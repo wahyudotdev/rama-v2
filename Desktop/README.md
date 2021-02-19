@@ -18,6 +18,18 @@ folder ini berisi file python untuk merender user interface
 semua program yang meng-inheritance dari QThread diletakkan di folder ini  
 
 ## Requirements
-- OpenCV v3 or latest (can be used with opencv python package)
+- pynput==1.7.2
+- imutils==0.5.3
+- pythonping==1.0.15
+- paho_mqtt==1.5.1
+- opencv-contrib-python-headless==4.4.0.44
+- opencv-python==4.4.0.44
+- numpy==1.20.1
+- PyQt5==5.15.0
+- PyQt5-sip==12.8.0
 ## Usage :
-- python -m rama
+1. pip install -r requirements.txt
+2. python -m rama
+
+## Build executable
+python -m nuitka --standalone setup.py --enable-plugin=numpy --enable-plugin=data-files --enable-plugin=multiprocessing --enable-plugin=qt-plugins --include-package-data --show-progress

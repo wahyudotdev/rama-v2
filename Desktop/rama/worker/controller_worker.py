@@ -29,7 +29,7 @@ class ControllerWorker(QThread):
             'Key.up': 1,
             'Key.down': 3,
             'Key.right': 2,
-            'Key.left': 3,
+            'Key.left': 4,
             'STOP': 0
         }
         directionText = {
