@@ -33,8 +33,9 @@ class UdpStream(object):
                     frame = frame.reshape(frame.shape[0], 1)
                     frame = cv2.imdecode(frame, cv2.IMREAD_COLOR)
                     # frame = cv2.imdecode(frame, cv2.IMREAD_REDUCED_COLOR_2)
-                    frame = cv2.flip(frame, 1)
+                    frame = cv2.flip(frame, -1)
                     frame = imutils.resize(frame, width=800)
+                    frame = imutils.rotate(frame, -90)
                     return frame
         except:
             pass
