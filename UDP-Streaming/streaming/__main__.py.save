@@ -11,9 +11,8 @@ from threading import Thread
 max_length = 65000
 host = "127.0.0.1"
 port = 5000
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.connect(('192.168.254.254',1))
-ip = s.getsockname()[0]
+hostname = socket.gethostname()
+ip = socket.gethostbyname(hostname)
 mqtt = None
 
 def start_stream():
@@ -73,12 +72,10 @@ def listen():
 
 def publiship():
     while True:
-        try:
-            mqtt.publish('rama/video',str(ip))
-            sleep(1)
-        except:
-            pass
+	    try:
+	        mqtt.publish('rama/video',str(ip))
+	    except:
+	        pass
 
 a = Thread(target=listen, args=(())).start()
 b = Thread(target=start_stream, args=(())).start()
-c = Thread(target=publiship, args=(())).start()

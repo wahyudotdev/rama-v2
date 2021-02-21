@@ -12,7 +12,7 @@ GND     TX
 #include "subscribe.h"
 #include <PubSubClient.h>
 #define LED         2
-#define MQTT_BROKER "192.168.254.100"
+#define MQTT_BROKER "192.168.254.50"
 #define MQTT_PORT   1883
 const char id[5]=          "rama";
 // Apabila konek ke hotspot maka status false, jika AP aktif maka true
@@ -20,7 +20,7 @@ bool isSoftAp;
 MyBroker myBroker;
 WiFiClient espClient;
 PubSubClient client(espClient);
-char ssid[] = "RAMA-V2";    // your network SSID (name)
+char ssid[] = "Telkom IoT";    // your network SSID (name)
 char pass[] = "0987654321"; // your network password
 char apssid[] = "RAMA";
 char *topic;
