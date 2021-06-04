@@ -4,5 +4,14 @@
         "array": "cpp",
         "string": "cpp",
         "string_view": "cpp"
-    }
+    },
+    "ros.distro": "noetic",
+    "python.autoComplete.extraPaths": [
+        "C:\\opt\\ros\\noetic\\x64\\lib/site-packages",
+        "C:\\opt\\ros\\noetic\\x64\\Lib\\site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "C:\\opt\\ros\\noetic\\x64\\lib/site-packages",
+        "C:\\opt\\ros\\noetic\\x64\\Lib\\site-packages"
+    ]
 }

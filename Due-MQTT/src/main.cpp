@@ -10,12 +10,11 @@ static void vBlink(void *parameters)
 }
 static void vController(void *parameters)
 {
-  unsigned long last;
+  unsigned long last = 0;
   pinMode(ESP_IO, INPUT);
   Serial2.begin(115200);
   Serial.println("Ready");
   DynamicJsonDocument doc(1024);
-  unsigned long l;
   for (;;)
   {
     if (millis() - last > 500)
@@ -115,42 +114,17 @@ void EN2()
 {
   m2.isrHandler();
 }
-#if defined(RAMAV1)
-void EN3()
-{
-  m3.isrHandler();
-}
-void EN4()
-{
-  m4.isrHandler();
-}
-#endif
 
 void timerIsr()
 {
   m1.calculateRpm(SAMPLING_TIME);
   m2.calculateRpm(SAMPLING_TIME);
-#if defined(RAMAV1)
-  m3.calculateRpm(SAMPLING_TIME);
-  m4.calculateRpm(SAMPLING_TIME);
-#endif
 }
 
 void setup()
 {
   Serial.begin(115200);
   pinMode(ESP_IO, INPUT_PULLUP);
-  // pinMode(10, INPUT);
-  // m1.pid(5, 0.1, 0.4, 2000);
-  // m2.pid(5, 0.1, 0.4, 2000);
-  // pinMode(TRIG3, OUTPUT);
-  // pinMode(ECHO3, INPUT);
-  // while (true)
-  // {
-  //   Serial.println(getRange(TRIG3, ECHO3));
-  //   delay(100);
-  // }
-
   // attachInterrupt(digitalPinToInterrupt(m1.en_a), EN1, FALLING);
   // attachInterrupt(digitalPinToInterrupt(m2.en_a), EN2, FALLING);
 
