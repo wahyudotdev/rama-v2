@@ -12,7 +12,7 @@ GND     TX
 #include "subscribe.h"
 #include <PubSubClient.h>
 #define LED         2
-#define MQTT_BROKER "192.168.254.50"
+#define MQTT_BROKER "192.168.0.50"
 #define MQTT_PORT   1883
 const char id[5]=          "rama";
 // Apabila konek ke hotspot maka status false, jika AP aktif maka true
