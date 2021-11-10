@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-10T01:25:27.182Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="Zqt5KZW65dTATAtya3Cq" version="15.7.0" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-10T01:49:23.035Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="13KUEbRER0oQTm-FnKKu" version="15.7.0" type="github">
   <diagram id="eVL7YrG7R0YvTg_GN-pG" name="block diagram">
     <mxGraphModel dx="974" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
@@ -74,6 +74,21 @@
         </mxCell>
         <mxCell id="E_2yHdArXKtX7QM-r7-f-26" value="MQTT" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="485" y="220" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="XNiJzONlCShi4sm001mq-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;" edge="1" parent="1" source="XNiJzONlCShi4sm001mq-1" target="E_2yHdArXKtX7QM-r7-f-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XNiJzONlCShi4sm001mq-1" value="Raspberry Pi" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="710" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XNiJzONlCShi4sm001mq-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;" edge="1" parent="1" source="XNiJzONlCShi4sm001mq-2" target="XNiJzONlCShi4sm001mq-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XNiJzONlCShi4sm001mq-2" value="Kamera USB" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="710" y="395" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XNiJzONlCShi4sm001mq-5" value="Direct UDP Socket" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="575" y="290" width="120" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
