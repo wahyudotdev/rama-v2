@@ -1,1 +1,81 @@
-<mxfile host="app.diagrams.net" modified="2021-11-10T01:16:23.265Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" version="15.7.0" etag="Ej-jnaKN2xqLl117MIHh" type="github"><diagram id="eVL7YrG7R0YvTg_GN-pG">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-11-10T01:25:27.182Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="Zqt5KZW65dTATAtya3Cq" version="15.7.0" type="github">
+  <diagram id="eVL7YrG7R0YvTg_GN-pG" name="block diagram">
+    <mxGraphModel dx="974" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.183;entryY=0.033;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="E_2yHdArXKtX7QM-r7-f-1" target="E_2yHdArXKtX7QM-r7-f-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="192" y="370" />
+              <mxPoint x="192" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.112;entryY=0.529;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="E_2yHdArXKtX7QM-r7-f-1" target="E_2yHdArXKtX7QM-r7-f-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="172" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-1" value="ESP8266-01" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-2" value="PC" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="290" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.439;entryY=0.016;entryDx=0;entryDy=0;exitX=0.875;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="E_2yHdArXKtX7QM-r7-f-3" target="E_2yHdArXKtX7QM-r7-f-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-3" value="MQTT Broker" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="130" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="E_2yHdArXKtX7QM-r7-f-5" target="E_2yHdArXKtX7QM-r7-f-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="390" />
+              <mxPoint x="260" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;" edge="1" parent="1" source="E_2yHdArXKtX7QM-r7-f-5" target="E_2yHdArXKtX7QM-r7-f-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-5" value="Arduino Due" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="395" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-10" value="UART" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="202" y="363" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-19" value="MQTT" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="240" y="230" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;" edge="1" parent="1" source="E_2yHdArXKtX7QM-r7-f-20" target="E_2yHdArXKtX7QM-r7-f-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="124" y="425" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-20" value="Sensor&lt;br&gt;Ultrasonik" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="520" width="68" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;" edge="1" parent="1" source="E_2yHdArXKtX7QM-r7-f-22" target="E_2yHdArXKtX7QM-r7-f-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-22" value="Rotary&lt;br&gt;Encoder" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="196" y="520" width="68" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-24" value="Driver&lt;br&gt;Motor" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="520" width="68" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E_2yHdArXKtX7QM-r7-f-26" value="MQTT" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="485" y="220" width="50" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
