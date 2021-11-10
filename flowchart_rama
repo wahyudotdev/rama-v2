@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-10T01:49:57.448Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="svNR6jcEImszvlwtsSqI" version="15.7.0" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-10T01:50:20.012Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36" etag="xXETHsYbOLjZ-qfM4Dot" version="15.7.0" type="github">
   <diagram id="eVL7YrG7R0YvTg_GN-pG" name="block diagram">
     <mxGraphModel dx="974" dy="542" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
@@ -87,8 +87,8 @@
         <mxCell id="XNiJzONlCShi4sm001mq-2" value="Kamera USB" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="710" y="395" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="XNiJzONlCShi4sm001mq-5" value="Kirim video&lt;br&gt;UDP Socket" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="595" y="285" width="80" height="30" as="geometry" />
+        <mxCell id="XNiJzONlCShi4sm001mq-5" value="Video livestream&lt;br&gt;UDP Socket" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="585" y="285" width="100" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
